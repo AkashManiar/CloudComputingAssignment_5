@@ -1,0 +1,76 @@
+<style>
+    table, th, td{
+        padding: 10px;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+    <div class="container">
+        <h2>Job Manager</h2>
+        <br>
+        <form action="/">
+            <button type= "submit" class="btn btn-info">Go to main page</button>
+        </form>
+        <br>
+        <h3>List of Jobs stored in system</h3>
+    <br>
+    <% if(typeof message != 'undefined'){ %>
+        <% if(success){ %>
+            <div class="alert alert-success" role="alert">
+                <%= message %>
+            </div>
+        <% } else {%>
+            <div class="alert alert-warning" role="alert">
+                <%= message %>
+            </div>
+        <% } %>
+    <% } %>
+    <% if(typeof jobs != 'undefined'){ %>
+        <row>
+            <col>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>JobId</th>
+                            <th>PartId</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% jobs.forEach(function(job){ %>
+                            <tr>
+                                <td> <%= job.id %> </td>
+                                <td> <%= job.partId446 %> </td>
+                                <td> <%= job.qty446 %> </td>
+                                <td> 
+                                    <form class="d-inline" action="/API446/editJob" method="POST">
+                                        <input name="jobId" value="<%= job.id %>" hidden/>
+                                        <input name="partId" value="<%= job.partId446 %>" hidden/>
+                                        <input name="qty" value="<%= job.qty446 %>" hidden/>
+                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                    </form>
+                                    <form class="d-inline" action="/API446/deleteJob/<%= job.id%>/<%= job.partId446 %>" method="POST">
+                                        <input type="submit" value="Delete" class="btn btn-danger">
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </col>
+        </row>
+    <% } %>
+    <div class="row">
+        <div class="col-md-3 offset-md-5">
+            <form action="/API446/addJob">
+                <button type= "submit" class="btn btn-success">
+                    Add Job
+                </button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</div>
